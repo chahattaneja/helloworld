@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+
+public class TestClass {
+    static long n;
+    static Set<Long> set = new HashSet<>();
+    static long res=-1;
+    static long min=-1;
+    static long max=-1;
+    static long sum=0;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter wr = new PrintWriter(System.out);
+        String input1 = br.readLine().trim();
+        String[] input = input1.split(" ");
+        n = Long.parseLong(input[0]);
+        long M = Long.parseLong(input[1]);
+        while(M > 0){
+            long X = Long.parseLong(br.readLine().trim());
+            long out_ = getOutput(X);
+            System.out.println(out_);
+            M--;
+        }
+        wr.close();
+        br.close();
+    }
+    static long getOutput(long X){
+        if(!set.contains(X))
+        {
+            if(min==-1)
+                min=X;
+            if(max==-1)
+                max=X;
+            if(X<min)
+                min=X;
+            if(X>max)
+                max=X;
+            sum+=X;
+            set.add(X);
+        }
+        return ((sum*2)-min-max+1+n);
+    }
+
+}
